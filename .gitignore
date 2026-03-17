@@ -1,0 +1,29 @@
+# Django
+backend/db.sqlite3
+backend/media/
+backend/static/
+backend/venv/
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*.log
+backend/.env
+
+# Next.js
+frontend/.next/
+frontend/node_modules/
+frontend/.env*.local
+frontend/out/
+frontend/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Other
+venv/
+.env
+*.docx
+!Rent_Agreement_Template.docx
+!example_rent_agreement.docx
+tmp/
+.gemini/

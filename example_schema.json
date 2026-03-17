@@ -1,0 +1,51 @@
+{
+  "sections": [
+    {
+      "title": "Agreement Details",
+      "fields": [
+        {"name": "agreement_city", "type": "text", "label": "City"},
+        {"name": "agreement_date", "type": "date", "label": "Date of Agreement"}
+      ]
+    },
+    {
+      "title": "Landlord & Property",
+      "fields": [
+        {"name": "lessor_name", "type": "text", "label": "Landlord Full Name"},
+        {"name": "lessor_address", "type": "textarea", "label": "Landlord Address"},
+        {"name": "property_address", "type": "textarea", "label": "Property Address being Rented"},
+        {"name": "property_type", "type": "select", "label": "Property Type", "options": ["Residential Flat", "Independent House", "Commercial Shop", "Office Space"]}
+      ]
+    },
+    {
+      "title": "Financial & Lease Terms",
+      "fields": [
+        {"name": "monthly_rent", "type": "number", "label": "Monthly Rent (Rs.)"},
+        {"name": "security_deposit", "type": "number", "label": "Security Deposit (Rs.)"},
+        {"name": "lease_start_date", "type": "date", "label": "Lease Start Date"},
+        {"name": "lease_duration_months", "type": "number", "label": "Duration (Months)", "default": "11"},
+        {"name": "notice_period_months", "type": "number", "label": "Notice Period (Months)", "default": "1"}
+      ]
+    },
+    {
+      "title": "Additional Inclusions",
+      "fields": [
+        {"name": "furniture_items", "type": "textarea", "label": "Furniture Provided (Optional)"}
+      ]
+    },
+    {
+      "title": "Tenants List",
+      "fields": [
+        {
+          "name": "tenants",
+          "type": "repeatable",
+          "label": "Tenants",
+          "fields": [
+            {"name": "name", "type": "text", "label": "Tenant Name"},
+            {"name": "aadhar", "type": "text", "label": "Aadhar Number"},
+            {"name": "address", "type": "textarea", "label": "Permanent Address"}
+          ]
+        }
+      ]
+    }
+  ]
+}

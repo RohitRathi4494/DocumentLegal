@@ -1,0 +1,69 @@
+{
+  "sections": [
+    {
+      "title": "General Agreement Details",
+      "fields": [
+        {"name": "agreement_city", "type": "text", "label": "Agreement City"},
+        {"name": "agreement_date", "type": "date", "label": "Agreement Date"}
+      ]
+    },
+    {
+      "title": "Landlord (Lessor) Details",
+      "fields": [
+        {"name": "lessor_name", "type": "text", "label": "Landlord Name"},
+        {"name": "lessor_relation", "type": "select", "label": "Relationship Prefix", "options": ["S/o", "D/o", "W/o", "C/o"]},
+        {"name": "lessor_father_name", "type": "text", "label": "Relative Name (Father/Husband)"},
+        {"name": "lessor_address", "type": "textarea", "label": "Landlord Address"}
+      ]
+    },
+    {
+      "title": "Primary Tenant (Tenant 1)",
+      "fields": [
+        {"name": "tenant1_name", "type": "text", "label": "Tenant 1 Name"},
+        {"name": "tenant1_relation", "type": "select", "label": "Relationship Prefix", "options": ["S/o", "D/o", "W/o", "C/o"]},
+        {"name": "tenant1_father_name", "type": "text", "label": "Relative Name (Father/Husband)"},
+        {"name": "tenant1_aadhar", "type": "text", "label": "Tenant 1 Aadhar Number"},
+        {"name": "tenant1_address", "type": "textarea", "label": "Tenant 1 Permanent Address"}
+      ]
+    },
+    {
+      "title": "Secondary Tenant (Tenant 2)",
+      "fields": [
+        {"name": "tenant2_name", "type": "text", "label": "Tenant 2 Name (Optional)"},
+        {"name": "tenant2_relation", "type": "select", "label": "Relationship Prefix (Optional)", "options": ["", "S/o", "D/o", "W/o", "C/o"]},
+        {"name": "tenant2_father", "type": "text", "label": "Relative Name (Optional)"},
+        {"name": "tenant2_aadhar", "type": "text", "label": "Tenant 2 Aadhar (Optional)"},
+        {"name": "tenant2_address", "type": "textarea", "label": "Tenant 2 Address (Optional)"}
+      ]
+    },
+    {
+      "title": "Property Details & Utilities",
+      "fields": [
+        {"name": "property_address", "type": "textarea", "label": "Property Address"},
+        {"name": "property_description", "type": "textarea", "label": "Property Description (e.g. 2BHK Setup)"},
+        {"name": "furniture_items", "type": "textarea", "label": "List of Furniture Provided"},
+        {"name": "maintenance_charges", "type": "number", "label": "Maintenance Charges (Rs/Month)"},
+        {"name": "electricity_rate", "type": "number", "label": "Electricity Rate per Unit"}
+      ]
+    },
+    {
+      "title": "Commercials & Timeline",
+      "fields": [
+        {"name": "monthly_rent", "type": "number", "label": "Monthly Rent Amount (Rs)"},
+        {"name": "rent_in_words", "type": "text", "label": "Monthly Rent in Words"},
+        {"name": "security_deposit", "type": "number", "label": "Security Deposit Amount (Rs)"},
+        {"name": "lease_start_date", "type": "date", "label": "Lease Start Date"},
+        {"name": "lease_duration", "type": "number", "label": "Lease Duration (Months)", "default": "11"},
+        {"name": "lease_end_date", "type": "date", "label": "Lease End Date"},
+        {"name": "lockin_period", "type": "number", "label": "Lock-in Period (Months)", "default": "6"}
+      ]
+    },
+    {
+      "title": "Witnesses",
+      "fields": [
+        {"name": "witness1", "type": "text", "label": "Witness 1 Name & Signature Details"},
+        {"name": "witness2", "type": "text", "label": "Witness 2 Name & Signature Details"}
+      ]
+    }
+  ]
+}
