@@ -60,33 +60,33 @@ export default function CreateDocumentPage() {
   }
 
   const handleInputChange = (fieldName: string, value: any) => {
-    setFormData(prev => ({ ...prev, [fieldName]: value }))
+    setFormData((prev: Record<string, any>) => ({ ...prev, [fieldName]: value }))
   }
 
   const handleRepeatableChange = (groupName: string, index: number, fieldName: string, value: any) => {
     const list = [...(formData[groupName] || [])]
     if (!list[index]) list[index] = {}
     list[index][fieldName] = value
-    setFormData(prev => ({ ...prev, [groupName]: list }))
+    setFormData((prev: Record<string, any>) => ({ ...prev, [groupName]: list }))
   }
 
   const addRepeatableRow = (groupName: string) => {
     const list = [...(formData[groupName] || [])]
     list.push({})
-    setFormData(prev => ({ ...prev, [groupName]: list }))
+    setFormData((prev: Record<string, any>) => ({ ...prev, [groupName]: list }))
   }
 
   const removeRepeatableRow = (groupName: string, index: number) => {
     const list = [...(formData[groupName] || [])]
     list.splice(index, 1)
-    setFormData(prev => ({ ...prev, [groupName]: list }))
+    setFormData((prev: Record<string, any>) => ({ ...prev, [groupName]: list }))
   }
 
   const handleClientSelect = (clientId: string) => {
     const client = clients.find(c => c.id.toString() === clientId)
     if (client) {
       // Auto-fill common fields if they exist in formData
-      setFormData(prev => ({
+      setFormData((prev: Record<string, any>) => ({
         ...prev,
         client_name: client.name,
         client_phone: client.phone,
