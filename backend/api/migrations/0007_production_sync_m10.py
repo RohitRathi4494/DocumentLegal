@@ -67,7 +67,7 @@ def promote_rohit_and_seed_templates(apps, schema_editor):
         defaults={
             'tenant': system_tenant,
             'name': 'Residential Rent Agreement (2024)',
-            'description': 'High-fidelity residential rental agreement with automated clauses for Indian jurisdiction.',
+            'description': 'High-fidelity residential rental agreement with automated clauses for Indian jurisdiction. (Production Sync)',
             'version': 1,
             'form_schema': form_schema,
             'is_global': True,
@@ -75,9 +75,15 @@ def promote_rohit_and_seed_templates(apps, schema_editor):
         }
     )
 
+    # Note: On Render Free, newly saved files in MEDIA_ROOT will disappear on restart.
+    # Our DocumentEngine now has a fallback to the whitelisted repository file 'Rent_Agreement_Template.docx'.
+    # We still try to save it for local environments where media persists.
     if (created or not doc_type.template_file) and os.path.exists(source_path):
-        with open(source_path, 'rb') as f:
-            doc_type.template_file.save(file_name, File(f), save=True)
+        try:
+            with open(source_path, 'rb') as f:
+                doc_type.template_file.save(file_name, File(f), save=True)
+        except Exception as e:
+            print(f"Warning: Could not save template file to media storage: {e}. Falling back to repo template.")
 
 class Migration(migrations.Migration):
 

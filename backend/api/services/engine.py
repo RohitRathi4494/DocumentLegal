@@ -10,15 +10,36 @@ class DocumentEngine:
     """
     
     @staticmethod
+    def _get_active_template_path(template_path):
+        """
+        Returns the existing path for a template, with a fallback to repository 
+        whitelisted templates if the media file is missing (common on ephemeral cloud storage).
+        """
+        if os.path.exists(template_path):
+            return template_path
+            
+        # Fallback 1: Root of the repository (where we whitelisted them in .gitignore)
+        filename = os.path.basename(template_path)
+        root_fallback = os.path.join(settings.BASE_DIR, '..', filename)
+        if os.path.exists(root_fallback):
+            return root_fallback
+            
+        # Fallback 2: Under backend/media/templates (if it was copied there in build)
+        media_fallback = os.path.join(settings.BASE_DIR, 'media', 'templates', filename)
+        if os.path.exists(media_fallback):
+            return media_fallback
+            
+        raise FileNotFoundError(f"Template not found at {template_path} and no repository fallbacks found.")
+
+    @staticmethod
     def render_document(template_path, data_json, is_preview=False):
         """
         Renders a document based on template and data.
-        Returns the absolute path to the generated file.
+        Returns the relative path to the generated file.
         """
-        if not os.path.exists(template_path):
-            raise FileNotFoundError(f"Template not found at {template_path}")
+        active_path = DocumentEngine._get_active_template_path(template_path)
             
-        doc = DocxTemplate(template_path)
+        doc = DocxTemplate(active_path)
         
         # Pre-process data (add calculated fields, loops etc)
         context = enhance_data_payload(data_json)
@@ -68,10 +89,9 @@ class DocumentEngine:
         import mammoth
         from io import BytesIO
 
-        if not os.path.exists(template_path):
-            raise FileNotFoundError(f"Template not found at {template_path}")
+        active_path = DocumentEngine._get_active_template_path(template_path)
             
-        doc = DocxTemplate(template_path)
+        doc = DocxTemplate(active_path)
         context = enhance_data_payload(data_json)
         doc.render(context)
         
