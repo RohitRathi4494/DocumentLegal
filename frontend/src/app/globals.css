@@ -12,15 +12,15 @@
 
 @layer base {
   :root {
-    --background: #0f1115;
-    --foreground: #f8fafc;
-    --card: #15181e;
-    --card-foreground: #f8fafc;
-    --border: #262b36;
+    --background: #f8fafc;
+    --foreground: #020617;
+    --card: #ffffff;
+    --card-foreground: #020617;
+    --border: #f1f5f9;
     --primary: #4f46e5;
     --primary-foreground: #ffffff;
-    --muted: #1e222a;
-    --muted-foreground: #94a3b8;
+    --muted: #f8fafc;
+    --muted-foreground: #64748b;
   }
 }
 

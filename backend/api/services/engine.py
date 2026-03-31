@@ -2,7 +2,7 @@ import os
 import uuid
 from docxtpl import DocxTemplate
 from django.conf import settings
-from .utils import enhance_data_payload
+from ..utils import enhance_data_payload # Adjusted for package structure
 
 class DocumentEngine:
     """
@@ -59,3 +59,30 @@ class DocumentEngine:
         
         # Return the relative path to be saved in DB or sent to frontend
         return f"{'previews' if is_preview else 'generated_docs'}/{filename}"
+
+    @staticmethod
+    def render_to_html(template_path, data_json):
+        """
+        Renders the document and returns the HTML string for preview.
+        """
+        import mammoth
+        from io import BytesIO
+
+        if not os.path.exists(template_path):
+            raise FileNotFoundError(f"Template not found at {template_path}")
+            
+        doc = DocxTemplate(template_path)
+        context = enhance_data_payload(data_json)
+        doc.render(context)
+        
+        # Save to a byte stream
+        target_stream = BytesIO()
+        doc.save(target_stream)
+        target_stream.seek(0)
+        
+        # Convert to HTML
+        result = mammoth.convert_to_html(target_stream)
+        html = result.value # The generated HTML
+        messages = result.messages # Any messages, such as warnings of unsupported elements
+        
+        return html
