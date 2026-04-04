@@ -165,6 +165,8 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_ALWAYS_EAGER = True # Run tasks synchronously without a worker
+CELERY_TASK_STORE_EAGER_RESULT = True
 # Razorpay Subscriptions
 RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "rzp_test_your_id")
 RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "your_secret")
