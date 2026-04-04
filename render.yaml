@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: docwriter-backend
+    name: docwriter-api
     env: docker
     rootDir: backend
     envVars:
