@@ -26,8 +26,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
+# Make entrypoint executable
+RUN chmod +x /app/entrypoint.sh
+
 # Create media and static directories
 RUN mkdir -p /app/media /app/staticfiles
 
-# The command will be overridden by docker-compose
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Define entrypoint to run migrations and collectstatic
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# Default command (used for web service, overridden for celery worker)
+CMD ["gunicorn", "legal_engine.wsgi:application", "--bind", "0.0.0.0:8000"]
