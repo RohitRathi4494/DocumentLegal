@@ -4,6 +4,7 @@ FROM python:3.12-slim-bookworm
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PORT 8000
 
 # Install system dependencies including LibreOffice
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -35,5 +36,5 @@ RUN mkdir -p /app/media /app/staticfiles
 # Define entrypoint to run migrations and collectstatic
 ENTRYPOINT ["/app/entrypoint.sh"]
 
-# Default command (used for web service, overridden for celery worker)
-CMD ["gunicorn", "legal_engine.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Default command (shell form to expand $PORT variable provided by Render)
+CMD gunicorn legal_engine.wsgi:application --bind 0.0.0.0:$PORT
